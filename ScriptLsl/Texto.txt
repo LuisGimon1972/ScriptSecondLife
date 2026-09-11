@@ -1,0 +1,17 @@
+Se a sua dúvida for sobre como funcionaria o processo prático de colocar esse script no Second Life para vender (mudando o foco dos cubos simples que você costumava fazer), o passo a passo na sua oficina de criação seria este:
+
+Construir a base: Você cria ou importa o modelo 3D de um móvel (uma poltrona, sofá ou banco) usando malha (mesh) ou os blocos tradicionais se preferir.
+
+Adicionar o inventário: Você abre o menu de conteúdo (inventário) daquele móvel dentro do Second Life e arrasta para dentro dele:
+
+O seu script principal de sentar.
+
+O arquivo da animação de sentar.
+
+O objeto prop que vai aparecer na mão (por exemplo, um copo de café).
+
+Colocar o script auxiliar no Prop: Antes de jogar o copo dentro do inventário da cadeira, você entra nas propriedades dele e coloca o segundo script pequenininho dentro do copo.
+
+Testar e Ajustar: Você senta na cadeira. O script vai ler a posição, trocar a pose do seu avatar e criar o copo na sua mão automaticamente. Se o copo nascer um pouco torto, você ajusta as coordenadas de posição (SIT_POSITION) no código até ficar perfeito.
+
+Empacotar para venda: Depois de tudo testado, você coloca o móvel em uma caixa (box) de venda, tira uma foto bonita do avatar sentado usando o item e o coloca no Marketplace ou na sua loja in-world!
