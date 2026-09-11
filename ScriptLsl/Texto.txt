@@ -31,3 +31,19 @@ Arraste o item: Abra a sua aba de Inventário normal do Second Life ao lado, sel
 Confira o nome: Certifique-se de que o nome do arquivo dentro da caixinha está exatamente igual ao que você configurou na linha string NOME_ARQUIVO_ITEM do script.
 
 Pronto! Agora o seu vendor já terá o arquivo disponível para entregar automaticamente assim que um cliente efetuar o pagamento.
+
+
+
+Para encontrar regiões no Second Life que oferecem espaços gratuitos (como Free Malls ou incubadoras de criadores) onde você possa colocar o seu vendor no chão, você pode pesquisar diretamente pelos seguintes nomes de regiões ou locais conhecidos no painel de busca do jogo:
+
+Builder's Brewery (uma das sandboxes mais famosas e tradicionais para construir, testar scripts e usar ferramentas públicas)
+
+Freebie Mall
+
+Newbie Inc
+
+Freebie Underground
+
+Sandbox Island
+
+Para ir até lá, basta abrir a busca do Second Life (Ctrl + F), ir na aba Places (Lugares), digitar o nome de um desses locais ou termos como Free Mall e se teleportar para o local escolhido para verificar os espaços disponíveis!
