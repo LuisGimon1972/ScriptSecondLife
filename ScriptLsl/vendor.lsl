@@ -1,20 +1,16 @@
-// ==========================================
-// VENDOR AUTOMÁTICO PRO - LICENÇA DE SCRIPT
-// ✅ Vende o próprio script do vendor e entrega uma cópia dele mesmo
-// ==========================================
 
-// ------------------- CONFIGURAÇÃO -------------------
-integer PRECIO = 300;                        // Preço da licença do script em L$
-string NOMBRE_PRODUTO = "Vendor Automático Pro"; // Nome exibido no texto flutuante
-string NOME_ARQUIVO_ITEM = "Script Vendor Pro";  // Nome EXATO do script que será entregue (deve estar no inventário)
+// ✅ VENDOR AUTOMÁTICO PRO - LICENÇA DE SCRIPT
+
+integer PRECIO = 300;                        
+string NOMBRE_PRODUTO = "Vendor Automático Pro"; 
+string NOME_ARQUIVO_ITEM = "Script Vendor Pro";  
 key DONO;                              
 
-// 🔗 LINK DA LOJA E DO PRODUTO (Opcional para divulgação)
 string LINK_LOJA = "secondlife:///app/agent/YOUR_UUID_HERE/about"; 
 string LINK_PRODUTO = "url:https://marketplace.secondlife.com/p/Personal-Planner-DEMO/28661509 [Ver Página do Produto]"; 
 
 string MENSAGEM_AGRADECIMENTO = "Obrigado por adquirir a licença do script! 💙\nVisite minha loja: ";
-// -----------------------------------------------------
+
 
 integer g_contador = 0;
 
@@ -66,8 +62,7 @@ default
             llOwnerSay("⚠️ AVISO: O script '" + NOME_ARQUIVO_ITEM + "' não foi encontrado no inventário!");
             return;
         }
-
-        // Entrega uma cópia do script do vendor para o comprador
+ 
         llGiveInventory(pagador, NOME_ARQUIVO_ITEM);
         
         g_contador++;
