@@ -1,22 +1,28 @@
 // ==========================================
-// VENDOR AUTOMÁTICO PRO (CORRIGIDO)
+// VENDOR AUTOMÁTICO PRO - LICENÇA DE SCRIPT
+// ✅ Vende o próprio script do vendor e entrega uma cópia dele mesmo
 // ==========================================
 
-integer PRECIO = 500;                  
-string NOMBRE_PRODUTO = "Meu Produto"; 
+// ------------------- CONFIGURAÇÃO -------------------
+integer PRECIO = 300;                        // Preço da licença do script em L$
+string NOMBRE_PRODUTO = "Vendor Automático Pro"; // Nome exibido no texto flutuante
+string NOME_ARQUIVO_ITEM = "Script Vendor Pro";  // Nome EXATO do script que será entregue (deve estar no inventário)
 key DONO;                              
+
+// 🔗 LINK DA LOJA E DO PRODUTO (Opcional para divulgação)
 string LINK_LOJA = "secondlife:///app/agent/YOUR_UUID_HERE/about"; 
-string MENSAGEM_AGRADECIMENTO = "Obrigado por comprar! 💙\nVisite minha loja: ";
+string LINK_PRODUTO = "url:https://marketplace.secondlife.com/p/Personal-Planner-DEMO/28661509 [Ver Página do Produto]"; 
+
+string MENSAGEM_AGRADECIMENTO = "Obrigado por adquirir a licença do script! 💙\nVisite minha loja: ";
+// -----------------------------------------------------
 
 integer g_contador = 0;
-integer DIALOG_CHANNEL = -992837; // Canal aleatório para o menu
-integer listener;
 
 AtualizarTexto()
 {
     llSetText(
         NOMBRE_PRODUTO + "\n" +
-        "Preco: L$ " + (string)PRECIO + "\n" +
+        "Licença: L$ " + (string)PRECIO + "\n" +
         "Vendidos: " + (string)g_contador,
         <1,1,1>, 1);
 }
@@ -28,8 +34,6 @@ default
         DONO = llGetOwner();
         AtualizarTexto();
         llRequestPermissions(DONO, PERMISSION_DEBIT);
-        
-        // Configura o objeto para receber dinheiro quando clicado diretamente
         llSetPayPrice(PAY_HIDE, [PRECIO, PAY_HIDE, PAY_HIDE, PAY_HIDE]);
     }
 
@@ -39,53 +43,37 @@ default
         
         if (comprador == DONO)
         {
-            llOwnerSay("✅ Vendor ativo | Vendidos: " + (string)g_contador + " | Preço: L$ " + (string)PRECIO);
+            llOwnerSay("✅ Vendor operacional | Produto: " + NOMBRE_PRODUTO + " | Licenças vendidas: " + (string)g_contador);
             return;
         }
 
-        // Abre um menu flutuante instruindo o usuário a pagar o objeto
-        llInstantMessage(comprador, "Para comprar " + NOMBRE_PRODUTO + ", clique com o botão direito no vendor e escolha 'Pagar' (Pay) o valor de L$ " + (string)PRECIO + ".");
+        llInstantMessage(comprador, "Para adquirir a licença de " + NOMBRE_PRODUTO + ", clique com o botão direito no vendor e escolha 'Pagar' (Pay) o valor de L$ " + (string)PRECIO + ".");
     }
 
     money(key pagador, integer valor)
     {
-        // Valor errado → devolve o dinheiro
         if (valor != PRECIO)
         {
             llGiveMoney(pagador, valor);
-            llInstantMessage(pagador, "❌ Valor incorreto!\nPreço: L$ " + (string)PRECIO + "\nDevolvido: L$ " + (string)valor);
+            llInstantMessage(pagador, "❌ Valor incorreto!\nPreço da licença: L$ " + (string)PRECIO + "\nDevolvido: L$ " + (string)valor);
             return;
         }
 
-        // ✅ Valor certo → entrega todos os itens do inventário (exceto este script)
-        integer total_itens = llGetInventoryNumber(INVENTORY_ALL);
-        integer entregou = FALSE;
-        integer i;
-
-        for (i = 0; i < total_itens; i++)
-        {
-            string item = llGetInventoryName(INVENTORY_ALL, i);
-            
-            if (item != llGetScriptName())
-            {
-                llGiveInventory(pagador, item);
-                entregou = TRUE;
-            }
-        }
-
-        if (entregou)
-        {
-            g_contador++;
-            AtualizarTexto();
-            
-            llInstantMessage(pagador, "✅ " + MENSAGEM_AGRADECIMENTO + LINK_LOJA);
-            llOwnerSay("💰 VENDA REALIZADA! → " + llKey2Name(pagador) + " | Total de vendas: " + (string)g_contador);
-        }
-        else
+        if (llGetInventoryType(NOME_ARQUIVO_ITEM) == INVENTORY_NONE)
         {
             llGiveMoney(pagador, valor);
-            llInstantMessage(pagador, "❌ Nenhum item encontrado no inventário do vendor. Dinheiro devolvido!");
-            llOwnerSay("⚠️ AVISO: O vendor foi acionado, mas está sem produtos no inventário!");
+            llInstantMessage(pagador, "❌ Erro: O arquivo do script não está no inventário do vendor. Dinheiro devolvido!");
+            llOwnerSay("⚠️ AVISO: O script '" + NOME_ARQUIVO_ITEM + "' não foi encontrado no inventário!");
+            return;
         }
+
+        // Entrega uma cópia do script do vendor para o comprador
+        llGiveInventory(pagador, NOME_ARQUIVO_ITEM);
+        
+        g_contador++;
+        AtualizarTexto();
+        
+        llInstantMessage(pagador, "✅ " + MENSAGEM_AGRADECIMENTO + LINK_LOJA);
+        llOwnerSay("💰 LICENÇA VENDIDA! → " + llKey2Name(pagador) + " comprou o " + NOMBRE_PRODUTO + " | Total: " + (string)g_contador);
     }
 }
