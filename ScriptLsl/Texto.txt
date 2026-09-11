@@ -15,3 +15,19 @@ Colocar o script auxiliar no Prop: Antes de jogar o copo dentro do inventário d
 Testar e Ajustar: Você senta na cadeira. O script vai ler a posição, trocar a pose do seu avatar e criar o copo na sua mão automaticamente. Se o copo nascer um pouco torto, você ajusta as coordenadas de posição (SIT_POSITION) no código até ficar perfeito.
 
 Empacotar para venda: Depois de tudo testado, você coloca o móvel em uma caixa (box) de venda, tira uma foto bonita do avatar sentado usando o item e o coloca no Marketplace ou na sua loja in-world!
+
+COLOCAR O PRODUTO NO Inventário DO OBJETO
+
+Para colocar o arquivo do seu produto (como a versão demo do Rental Manager ou do Personal Planner) dentro da caixinha (vendor), siga estes passos simples no Second Life:
+
+Reze a caixinha na sua loja: Arraste o objeto vendor que você criou do seu inventário para o chão da sua região.
+
+Abra as propriedades do objeto: Clique com o botão direito do mouse em cima da caixinha e selecione Editar (Edit).
+
+Acesse a aba de conteúdo: Na janela que se abrir, clique na aba Conteúdo (Contents) (se ela não aparecer logo de cara, clique em More Info para expandir as opções da janela).
+
+Arraste o item: Abra a sua aba de Inventário normal do Second Life ao lado, selecione o arquivo exato do seu produto (ex: Rental Manager DEMO) e arraste-o para dentro da aba de Conteúdo da caixinha.
+
+Confira o nome: Certifique-se de que o nome do arquivo dentro da caixinha está exatamente igual ao que você configurou na linha string NOME_ARQUIVO_ITEM do script.
+
+Pronto! Agora o seu vendor já terá o arquivo disponível para entregar automaticamente assim que um cliente efetuar o pagamento.
