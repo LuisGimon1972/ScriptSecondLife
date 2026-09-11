@@ -4,13 +4,13 @@
 // ==========================================
 
 // ------------------- CONFIGURAÇÃO -------------------
-integer PRECIO = 500;                    // Preço em L$ (ou 0 para a versão demo)
-string NOMBRE_PRODUTO = "Personal Planner"; // Nome que aparece no texto flutuante
-string NOME_ARQUIVO_ITEM = "Personal Planner"; // Nome EXATO do arquivo no inventário
+integer PRECIO = 10;                    // Preço em L$ (ou 0 para a versão demo)
+string NOMBRE_PRODUTO = "Personal Planner Demo"; // Nome que aparece no texto flutuante
+string NOME_ARQUIVO_ITEM = "Personal Planner Demo"; // Nome EXATO do arquivo no inventário
 key DONO;                              
 
 // 🔗 LINK DA SUA LOJA (Substitua pelo SLURL da sua loja ou perfil)
-string LINK_LOJA = "secondlife:///app/agent/YOUR_UUID_HERE/about"; 
+string LINK_LOJA = "https://marketplace.secondlife.com/stores/273481"; 
 
 // 🔗 LINK DIRETO DO PRODUTO (Fornecido por você)
 string LINK_PRODUTO = "https://marketplace.secondlife.com/p/Personal-Planner-DEMO/28661509"; 
