@@ -1,7 +1,6 @@
-// ==========================================
+
 // VENDOR AUTOMÁTICO PRO - ITEM ÚNICO
 // ✅ Com link da loja e link direto do produto
-// ==========================================
 
 // ------------------- CONFIGURAÇÃO -------------------
 integer PRECIO = 10;                    // Preço em L$ (ou 0 para a versão demo)
