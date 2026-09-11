@@ -1,13 +1,22 @@
 // ==========================================
-// VENDOR AUTOMÁTICO PRO - MULTI-PRODUTO
-// 📦 Produtos: Rental Manager & Personal Planner
+// VENDOR AUTOMÁTICO PRO - ITEM ÚNICO
+// ✅ Com link da loja e link direto do produto
 // ==========================================
 
-integer PRECIO = 500;                  
-string NOMBRE_PRODUTO = "Rental Manager & Personal Planner"; 
+// ------------------- CONFIGURAÇÃO -------------------
+integer PRECIO = 500;                    // Preço em L$ (ou 0 para a versão demo)
+string NOMBRE_PRODUTO = "Personal Planner"; // Nome que aparece no texto flutuante
+string NOME_ARQUIVO_ITEM = "Personal Planner"; // Nome EXATO do arquivo no inventário
 key DONO;                              
+
+// 🔗 LINK DA SUA LOJA (Substitua pelo SLURL da sua loja ou perfil)
 string LINK_LOJA = "secondlife:///app/agent/YOUR_UUID_HERE/about"; 
+
+// 🔗 LINK DIRETO DO PRODUTO (Fornecido por você)
+string LINK_PRODUTO = "https://marketplace.secondlife.com/p/Personal-Planner-DEMO/28661509"; 
+
 string MENSAGEM_AGRADECIMENTO = "Obrigado por comprar! 💙\nVisite minha loja: ";
+// -----------------------------------------------------
 
 integer g_contador = 0;
 
@@ -28,7 +37,7 @@ default
         AtualizarTexto();
         llRequestPermissions(DONO, PERMISSION_DEBIT);
         
-        // Configura o objeto para receber o valor exato no clique de pagamento
+        // Configura o preço exato para o botão de pagamento rápido
         llSetPayPrice(PAY_HIDE, [PRECIO, PAY_HIDE, PAY_HIDE, PAY_HIDE]);
     }
 
@@ -38,16 +47,36 @@ default
         
         if (comprador == DONO)
         {
-            llOwnerSay("✅ Vendor ativo | Vendidos: " + (string)g_contador + " | Preço: L$ " + (string)PRECIO);
+            llOwnerSay("✅ Vendor ativo | Produto: " + NOMBRE_PRODUTO + " | Vendidos: " + (string)g_contador);
             return;
         }
 
-        // Instrução enviada ao cliente quando ele toca no vendor
-        llInstantMessage(comprador, "Para adquirir o " + NOMBRE_PRODUTO + ", clique com o botão direito no vendor e escolha 'Pagar' (Pay) o valor de L$ " + (string)PRECIO + ".");
+        // Se o preço for 0 (Versão Demo), entrega direto ao tocar
+        if (PRECIO == 0)
+        {
+            if (llGetInventoryType(NOME_ARQUIVO_ITEM) == INVENTORY_NONE)
+            {
+                llInstantMessage(comprador, "❌ Erro: O arquivo demo não está no inventário do vendor.");
+                return;
+            }
+            llGiveInventory(comprador, NOME_ARQUIVO_ITEM);
+            llInstantMessage(comprador, "✅ Aqui está a sua versão DEMO de " + NOMBRE_PRODUTO + "!\n🔗 Página do produto: " + LINK_PRODUTO + "\n🏪 Visite nossa loja: " + LINK_LOJA);
+        }
+        else
+        {
+            llInstantMessage(comprador, "Para adquirir " + NOMBRE_PRODUTO + ", clique com o botão direito no vendor e escolha 'Pagar' (Pay) o valor de L$ " + (string)PRECIO + ".\n🔗 Veja o produto: " + LINK_PRODUTO);
+        }
     }
 
     money(key pagador, integer valor)
     {
+        // Se for um vendor pago, bloqueia pagamentos caso esteja configurado como 0
+        if (PRECIO == 0)
+        {
+            llGiveMoney(pagador, valor);
+            return;
+        }
+
         // Valor errado → devolve o dinheiro
         if (valor != PRECIO)
         {
@@ -56,36 +85,22 @@ default
             return;
         }
 
-        // ✅ Valor certo → entrega todos os itens do inventário de uma vez (Rental Manager + Personal Planner)
-        integer total_itens = llGetInventoryNumber(INVENTORY_ALL);
-        integer entregou = FALSE;
-        integer i;
-
-        for (i = 0; i < total_itens; i++)
-        {
-            string item = llGetInventoryName(INVENTORY_ALL, i);
-            
-            // Entrega tudo o que estiver no inventário, exceto o próprio script do vendor
-            if (item != llGetScriptName())
-            {
-                llGiveInventory(pagador, item);
-                entregou = TRUE;
-            }
-        }
-
-        if (entregou)
-        {
-            g_contador++;
-            AtualizarTexto();
-            
-            llInstantMessage(pagador, "✅ " + MENSAGEM_AGRADECIMENTO + LINK_LOJA);
-            llOwnerSay("💰 VENDA REALIZADA! → " + llKey2Name(pagador) + " | Total de vendas: " + (string)g_contador);
-        }
-        else
+        // ✅ Valor certo → Verifica se o arquivo específico existe no inventário e o entrega
+        if (llGetInventoryType(NOME_ARQUIVO_ITEM) == INVENTORY_NONE)
         {
             llGiveMoney(pagador, valor);
-            llInstantMessage(pagador, "❌ Nenhum item encontrado no inventário do vendor. Dinheiro devolvido!");
-            llOwnerSay("⚠️ AVISO: O vendor foi acionado, mas está sem produtos no inventário!");
+            llInstantMessage(pagador, "❌ Erro: O produto principal não está no inventário do vendor. Dinheiro devolvido!");
+            llOwnerSay("⚠️ AVISO: O arquivo '" + NOME_ARQUIVO_ITEM + "' não foi encontrado no inventário!");
+            return;
         }
+
+        // Entrega apenas o item configurado
+        llGiveInventory(pagador, NOME_ARQUIVO_ITEM);
+        
+        g_contador++;
+        AtualizarTexto();
+        
+        llInstantMessage(pagador, "✅ " + MENSAGEM_AGRADECIMENTO + LINK_LOJA + "\n🔗 Detalhes do item: " + LINK_PRODUTO);
+        llOwnerSay("💰 VENDA REALIZADA! → " + llKey2Name(pagador) + " levou " + NOMBRE_PRODUTO + " | Total: " + (string)g_contador);
     }
 }
