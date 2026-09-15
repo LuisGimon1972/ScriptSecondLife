@@ -4,7 +4,7 @@
 // ==========================================
 
 // ------------------- CONFIGURAÇÃO -------------------
-integer PRECIO = 10;                        // Preço da Demo em L$
+integer PRECIO = 1;                        // Preço da Demo em L$
 string NOMBRE_PRODUTO = "Personal Planner Demo"; // Nome exibido no texto flutuante
 string NOME_ARQUIVO_ITEM = "Personal Planner Demo"; // Nome EXATO do arquivo no inventário
 key DONO;                              
