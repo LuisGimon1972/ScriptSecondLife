@@ -31,6 +31,7 @@ default
 {
     state_entry()
     {
+        llSetObjectName("Vendor Automatic Pro"); 
         DONO = llGetOwner();
         AtualizarTexto();
         llRequestPermissions(DONO, PERMISSION_DEBIT);

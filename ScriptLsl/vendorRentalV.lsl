@@ -33,6 +33,7 @@ default
 {
     state_entry()
     {
+        llSetObjectName("Vendor Rental Manager v1.00"); 
         DONO = llGetOwner();
         AtualizarTexto();
         llRequestPermissions(DONO, PERMISSION_DEBIT);
