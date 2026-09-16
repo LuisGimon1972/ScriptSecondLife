@@ -33,7 +33,7 @@ default
 {
     state_entry()
     {
-        llSetObjectName("Vendor Personal Planner [DEMO]"); 
+        llSetObjectName("Vendor Personal Planner v1.00"); 
         DONO = llGetOwner();
         AtualizarTexto();
         llRequestPermissions(DONO, PERMISSION_DEBIT);
