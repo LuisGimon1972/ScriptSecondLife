@@ -53,3 +53,17 @@ http://maps.secondlife.com/secondlife/Ilithyia/41/134/97
 meu pc windows 10 com 4 gb de RAM mas não consigo execuar bem o Second Lite
 
 Windows + R → digite dxdiag → Enter
+
+Gráficos
+
+Qualidade: Low / Baixa
+Draw Distance: 64 m
+Shadows: Off
+Depth of Field: Off
+Ambient Occlusion: Off
+Anti-Aliasing: Off
+Reflections: Off
+Water Reflections: Low/Off
+Avatar Complexity: Low
+Maximum Complexity: baixo
+Renderizar avatares: somente você ou poucos avatares
