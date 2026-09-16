@@ -30,7 +30,8 @@ AtualizarTexto()
 default
 {
     state_entry()
-    {
+    { 
+        llSetObjectName("Vendor Rental Manager [DEMO]");
         DONO = llGetOwner();
         AtualizarTexto();
         llRequestPermissions(DONO, PERMISSION_DEBIT);
