@@ -68,7 +68,7 @@ Avatar Complexity: Low
 Maximum Complexity: baixo
 Renderizar avatares: somente você ou poucos avatares
 
-free vendor space
+-> free vendor space
 free shop space
 free mall
 free merchant
