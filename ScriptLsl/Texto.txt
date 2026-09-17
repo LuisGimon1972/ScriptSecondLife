@@ -95,3 +95,12 @@ O cliente clica no espelho.
 O Second Life exibe a caixa de permissão pedindo autorização de anexo.
 
 O menu flutuante abre instantaneamente. Ao clicar em uma opção, o sistema processa a prova de forma limpa, sem encher o inventário permanente do usuário com dezenas de caixas espalhadas pela loja.
+
+
+-> O Espelho Básico: Basta criar um Cubo comum.
+
+Ajustar as Medidas: Achate o cubo para que ele fique com uma espessura fina (como uma placa ou quadro na parede) e ajuste a altura e largura no formato de um espelho (por exemplo, vertical ou horizontal).
+
+Aplicar a Textura e o Script: É nessa placa que você vai configurar a textura com efeito de reflexo/vidro (que conversamos agora pouco) e arrastar o script para dentro dela.
+
+Ou seja, você só precisa moldar um bloco básico em forma de retângulo no próprio mundo virtual. O script e a textura fazem o resto do trabalho para transformá-lo em um espelho inteligente!
