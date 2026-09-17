@@ -67,3 +67,5 @@ Water Reflections: Low/Off
 Avatar Complexity: Low
 Maximum Complexity: baixo
 Renderizar avatares: somente você ou poucos avatares
+
+proba
