@@ -80,3 +80,18 @@ free vendor
 free rental shop
 
 https://gsmmestre.com/es/products/5-credits-phoenix-service-tool?utm_source=chatgpt.com
+
+Espelho:
+
+Como estruturar isso na sua loja na prática:
+Monte o Espelho: Crie o objeto da moldura na sua simulação e insira este script na aba Conteúdo (Contents).
+
+Insira as Peças: Coloque dentro do conteúdo do espelho os objetos correspondentes aos nomes da lista (por exemplo, um objeto físico chamado exatamente Jaqueta Couro).
+
+A Experiência do Cliente:
+
+O cliente clica no espelho.
+
+O Second Life exibe a caixa de permissão pedindo autorização de anexo.
+
+O menu flutuante abre instantaneamente. Ao clicar em uma opção, o sistema processa a prova de forma limpa, sem encher o inventário permanente do usuário com dezenas de caixas espalhadas pela loja.
