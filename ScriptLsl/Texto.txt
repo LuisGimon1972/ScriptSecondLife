@@ -145,3 +145,24 @@ Quer jogar Linha? Escolhe "Modo LINHA" no Globo e clica em Iniciar. A cartela de
 Quer jogar Cartela Cheia a seguir? Seleciona "Modo CHEIA" no Globo e clica em Iniciar. A mesma cartela limpa os números marcados, reseta-se e passa a validar os 24 números automaticamente.
 
 Desta forma, no chão do seu evento basta ter o Globo e 1 Distribuidor com a Cartela Inteligente lá dentro.
+
+
+
+
+Para um painel de palco no Second Life ser visto com clareza pela plateia, a proporção recomendada é retangular (16:9 ou 4:3).
+
+Dimensões Recomendadas (Menu de Edição / Size):
+
+Y (Largura): 5.0m (dá presença no palco e cobre bem a linha de visão)
+
+Z (Altura): 3.0m (comprimento ideal para as 8 linhas de texto do painel)
+
+X (Espessura): 0.1m (fino como uma tela de LED/TV)
+
+Dicas para Melhorar a Visibilidade no Palco:
+
+Fundo de Alto Contraste: Pinte a face frontal do painel com uma cor bem escura (Preto ou Azul Marinho) para que o texto flutuante amarelo/dourado sobressaia.
+
+Ativar Luz Própria (Fullbright): Na aba Texture do objeto, marque a caixa Fullbright. Isso faz a tela brilhar no escuro sem depender das luzes da boate.
+
+Altura de Altura do Palco: Posicione a base do painel entre 1.5m e 2.0m de altura em relação ao chão onde os avatares ficam, evitando que a cabeça dos jogadores tape a visão dos números.
