@@ -27,6 +27,7 @@ atualizar_painel() {
 default
 {
     state_entry() {
+        llSetObjectName("Bingo Palco Visualizador");
         atualizar_painel();
         llListen(canal_bingo, "", NULL_KEY, "");
     }

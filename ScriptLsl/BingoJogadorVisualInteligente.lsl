@@ -87,7 +87,9 @@ atualizar_visual(integer venceu) {
 
 default
 {
-    state_entry() { gerar_cartela(); atualizar_visual(FALSE); llListen(canal_bingo, "", NULL_KEY, ""); }
+    state_entry() { 
+        llSetObjectName("Cartela Bingo Original Visual");
+        gerar_cartela(); atualizar_visual(FALSE); llListen(canal_bingo, "", NULL_KEY, ""); }
     on_rez(integer start_param) { llResetScript(); }
 
     listen(integer channel, string name, key id, string message)

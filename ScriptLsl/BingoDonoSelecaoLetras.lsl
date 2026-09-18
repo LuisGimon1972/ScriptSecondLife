@@ -25,6 +25,7 @@ default
 {
     state_entry()
     {
+        llSetObjectName("Bingo Dono Original");
         llListen(canal_bingo, "", NULL_KEY, "");
         atualizar_painel();
     }

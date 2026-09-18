@@ -8,6 +8,7 @@ default
     state_entry()
     {
         // O globo ouve o mesmo canal para escutar quando alguém ganha
+        llSetObjectName("Bingo Dono");
         llListen(canal_bingo, "", NULL_KEY, "");
         llSetText("🎱 BINGO MASTER PRO 🎱\nClique para Iniciar o Jogo", <1.0, 1.0, 1.0>, 1.0);
     }

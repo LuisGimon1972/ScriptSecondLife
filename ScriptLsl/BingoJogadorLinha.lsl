@@ -98,6 +98,7 @@ default
 {
     state_entry()
     {
+        llSetObjectName("Cartela Bingo Linhas");
         gerar_cartela();
         atualizar_visual(FALSE);
         llListen(canal_bingo, "", NULL_KEY, "");

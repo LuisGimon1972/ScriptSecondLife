@@ -90,6 +90,7 @@ default
 {
     state_entry()
     {
+        llSetObjectName("Cartela Bingo Cheia");
         gerar_cartela();
         atualizar_visual(FALSE); // Inicia sem vitória
         llListen(canal_bingo, "", NULL_KEY, "");

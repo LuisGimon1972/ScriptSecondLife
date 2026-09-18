@@ -5,6 +5,7 @@ default
 {
     state_entry()
     {
+        llSetObjectName("Distribudor do Bingo");
         llSetText("📦 DISTRIBUIDOR DE BINGO 📦\nModo Atual: LINHA\nClique para pegar sua cartela!", <0.0, 1.0, 1.0>, 1.0);
     }
 
