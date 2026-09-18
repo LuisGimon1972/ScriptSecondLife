@@ -1,0 +1,145 @@
+list numeros_cartela = [];
+list numeros_marcados = [];
+integer canal_bingo = 7777; 
+integer ja_venceu = FALSE;
+
+list sortear_coluna(integer min, integer max) {
+    list coluna = [];
+    while (llGetListLength(coluna) < 5) {
+        integer num = min + (integer)llFrand(max - min + 1);
+        if (llListFindList(coluna, [num]) == -1) {
+            coluna += [num];
+        }
+    }
+    return coluna;
+}
+
+gerar_cartela() {
+    numeros_cartela = [];
+    numeros_marcados = [];
+    ja_venceu = FALSE;
+    
+    list B = sortear_coluna(1, 15);
+    list I = sortear_coluna(16, 30);
+    list N = sortear_coluna(31, 45);
+    list G = sortear_coluna(46, 60);
+    list O = sortear_coluna(61, 75);
+    
+    integer i;
+    for (i = 0; i < 5; i++) {
+        numeros_cartela += [llList2Integer(B, i)];
+        numeros_cartela += [llList2Integer(I, i)];
+        if (i == 2) numeros_cartela += [0]; 
+        else numeros_cartela += [llList2Integer(N, i)];
+        numeros_cartela += [llList2Integer(G, i)];
+        numeros_cartela += [llList2Integer(O, i)];
+    }
+}
+
+integer ta_marcado(integer idx) {
+    if (idx == 12) return TRUE; 
+    integer num = llList2Integer(numeros_cartela, idx);
+    if (llListFindList(numeros_marcados, [num]) != -1) return TRUE;
+    return FALSE;
+}
+
+integer verificar_linhas() {
+    if (ta_marcado(0) && ta_marcado(1) && ta_marcado(2) && ta_marcado(3) && ta_marcado(4)) return TRUE;
+    if (ta_marcado(5) && ta_marcado(6) && ta_marcado(7) && ta_marcado(8) && ta_marcado(9)) return TRUE;
+    if (ta_marcado(10) && ta_marcado(11) && ta_marcado(12) && ta_marcado(13) && ta_marcado(14)) return TRUE;
+    if (ta_marcado(15) && ta_marcado(16) && ta_marcado(17) && ta_marcado(18) && ta_marcado(19)) return TRUE;
+    if (ta_marcado(20) && ta_marcado(21) && ta_marcado(22) && ta_marcado(23) && ta_marcado(24)) return TRUE;
+    
+    if (ta_marcado(0) && ta_marcado(5) && ta_marcado(10) && ta_marcado(15) && ta_marcado(20)) return TRUE;
+    if (ta_marcado(1) && ta_marcado(6) && ta_marcado(11) && ta_marcado(16) && ta_marcado(21)) return TRUE;
+    if (ta_marcado(2) && ta_marcado(7) && ta_marcado(12) && ta_marcado(17) && ta_marcado(22)) return TRUE;
+    if (ta_marcado(3) && ta_marcado(8) && ta_marcado(13) && ta_marcado(18) && ta_marcado(23)) return TRUE;
+    if (ta_marcado(4) && ta_marcado(9) && ta_marcado(14) && ta_marcado(19) && ta_marcado(24)) return TRUE;
+    
+    if (ta_marcado(0) && ta_marcado(6) && ta_marcado(12) && ta_marcado(18) && ta_marcado(24)) return TRUE;
+    if (ta_marcado(4) && ta_marcado(8) && ta_marcado(12) && ta_marcado(16) && ta_marcado(20)) return TRUE;
+    
+    return FALSE;
+}
+
+atualizar_visual(integer venceu) {
+    string texto = "";
+    vector cor = <0.0, 1.0, 1.0>;
+    
+    if (venceu) {
+        texto = "🎉 BINGO! BATEU LINHA! 🎉\n\n";
+        cor = <0.0, 1.0, 0.0>; 
+    } else {
+        texto = "✨ SUA CARTELA ✨\n\n";
+    }
+    
+    texto += " B   I   N   G   O\n";
+    
+    integer i;
+    for (i = 0; i < 25; i++) {
+        if (i == 12) {
+            texto += "[X] ";
+        } else {
+            integer num = llList2Integer(numeros_cartela, i);
+            if (llListFindList(numeros_marcados, [num]) != -1) {
+                texto += "[X] ";
+            } else {
+                string s = (string)num;
+                if (llStringLength(s) == 1) s = "0" + s;
+                texto += s + " ";
+            }
+        }
+        if ((i + 1) % 5 == 0) texto += "\n";
+    }
+    llSetText(texto, cor, 1.0);
+}
+
+default
+{
+    state_entry()
+    {
+        gerar_cartela();
+        atualizar_visual(FALSE);
+        llListen(canal_bingo, "", NULL_KEY, "");
+    }
+    
+    on_rez(integer start_param)
+    {
+        llResetScript(); 
+    }
+
+    listen(integer channel, string name, key id, string message)
+    {
+        if (ja_venceu) return; 
+        
+        // Se a mensagem for um aviso de vencedor do globo, ignora na cartela
+        if (llSubStringIndex(message, "VENCEDOR:") != -1) return;
+        
+        integer numero_sorteado = (integer)message;
+        
+        if (llListFindList(numeros_cartela, [numero_sorteado]) != -1)
+        {
+            if (llListFindList(numeros_marcados, [numero_sorteado]) == -1)
+            {
+                numeros_marcados += [numero_sorteado];
+                llOwnerSay("🎯 Você marcou o número: " + message);
+                
+                if (verificar_linhas())
+                {
+                    ja_venceu = TRUE;
+                    string nome = llKey2Name(llGetOwner());
+                    llSay(0, "🎉 BINGO!!! " + nome + " FEZ LINHA E VENCEU O JOGO! 🎉");
+                    
+                    // --- AQUI ESTÁ A MÁGICA: A CARTELA AVISA O GLOBO PARA PARAR ---
+                    llRegionSay(canal_bingo, "VENCEDOR:" + nome);
+                    
+                    atualizar_visual(TRUE);
+                }
+                else
+                {
+                    atualizar_visual(FALSE);
+                }
+            }
+        }
+    }
+}
