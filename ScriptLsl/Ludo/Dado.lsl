@@ -1,3 +1,4 @@
+integer CANAL_JOGO = -987654; // O mesmo canal do Controlador Central
 integer face_sorteada;
 
 default
@@ -9,17 +10,19 @@ default
 
     touch_start(integer total_number)
     {
-        // llFrand(6.0) gera um float de 0.0 a 5.999. 
-        // Convertendo para integer (inteiro) temos 0 a 5. Somamos 1 para ter 1 a 6.
+        // Pega a UUID (chave) de quem clicou no dado
+        key id_jogador = llDetectedKey(0); 
+
+        // Gera o número de 1 a 6
         face_sorteada = (integer)llFrand(6.0) + 1;
         
-        string nome_jogador = llDetectedName(0);
+        // Envia o comando no formato exato que o Controlador espera:
+        // Exemplo de saída: "DADO:66864f3c-e095-d9c8-058d-d6575e6ed1b8:4"
+        llRegionSay(CANAL_JOGO, "DADO:" + (string)id_jogador + ":" + (string)face_sorteada);
         
-        // Anuncia o resultado no chat local
-        llSay(0, nome_jogador + " rolou um " + (string)face_sorteada + "!");
-        
-        // Envia o valor para a peça (Usando o canal 99 para comunicação entre objetos)
-        // Em um jogo real, você enviaria para o controlador do tabuleiro para validar de quem é a vez.
-        llRegionSay(99, (string)face_sorteada);
+        // Opcional: Uma pequena animação de texto no próprio dado para dar feedback visual
+        llSetText("Rolando...", <1,1,0>, 1.0);
+        llSleep(0.5);
+        llSetText("Resultado: " + (string)face_sorteada + "\nClique para rolar", <1,1,1>, 1.0);
     }
 }

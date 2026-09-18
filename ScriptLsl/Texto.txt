@@ -171,3 +171,11 @@ Altura de Altura do Palco: Posicione a base do painel entre 1.5m e 2.0m de altur
     BingoDistribuidor --> BingoJogadorInteligente
     BingoPalco
 
+
+LUDO
+Como integrar os objetos no Second Life:
+Tabuleiro: Coloque o script Controlador_Ludo.lsl no prim principal do tabuleiro. Os jogadores clicam nele para entrar nas cores (0: Vermelho, 1: Azul, 2: Amarelo, 3: Verde).
+
+Dado: No script do Dado, quando clicado, envie o resultado para o controlador com llRegionSay(-987654, "DADO:" + (string)llDetectedKey(0) + ":" + (string)valor);.
+
+Peças: Cada peça monitora o canal -987654. Quando clicada para se mover, valida se o turno_atual bate com a sua cor e, ao finalizar a animação do movimento, avisa o controlador com llRegionSay(-987654, "PECA_MOVIDA:" + (string)minha_cor);
