@@ -1,6 +1,7 @@
 list numeros_cartela = [];
 list numeros_marcados = [];
 integer canal_bingo = 7777; // Deve ser o mesmo canal do Globo
+integer ja_venceu = FALSE;
 
 // Função para sortear números sem repetição para cada coluna
 list sortear_coluna(integer min, integer max) {
@@ -18,6 +19,7 @@ list sortear_coluna(integer min, integer max) {
 gerar_cartela() {
     numeros_cartela = [];
     numeros_marcados = [];
+    ja_venceu = FALSE;
     
     list B = sortear_coluna(1, 15);
     list I = sortear_coluna(16, 30);
@@ -40,8 +42,18 @@ gerar_cartela() {
 }
 
 // Atualiza o texto flutuante desenhando a cartela
-atualizar_visual() {
-    string texto = "✨ SUA CARTELA ✨\n\n";
+atualizar_visual(integer venceu) {
+    string texto = "";
+    vector cor = <0.0, 1.0, 1.0>; // Cor Ciano (padrão)
+    
+    // Se o jogador venceu, muda o título e a cor para Verde
+    if (venceu) {
+        texto = "🎉 BINGO! VOCÊ VENCEU! 🎉\n\n";
+        cor = <0.0, 1.0, 0.0>; 
+    } else {
+        texto = "✨ SUA CARTELA ✨\n\n";
+    }
+    
     texto += " B   I   N   G   O\n";
     
     integer i;
@@ -64,10 +76,14 @@ atualizar_visual() {
         if ((i + 1) % 5 == 0) texto += "\n";
     }
     
-    texto += "\nFaltam: " + (string)(24 - llGetListLength(numeros_marcados)) + " números!";
+    if (venceu) {
+        texto += "\nCARTELA COMPLETA!";
+    } else {
+        texto += "\nFaltam: " + (string)(24 - llGetListLength(numeros_marcados)) + " números!";
+    }
     
-    // Mostra o texto projetado na cor ciano
-    llSetText(texto, <0.0, 1.0, 1.0>, 1.0);
+    // Mostra o texto projetado na cor definida
+    llSetText(texto, cor, 1.0);
 }
 
 default
@@ -75,7 +91,7 @@ default
     state_entry()
     {
         gerar_cartela();
-        atualizar_visual();
+        atualizar_visual(FALSE); // Inicia sem vitória
         llListen(canal_bingo, "", NULL_KEY, "");
     }
     
@@ -87,6 +103,11 @@ default
 
     listen(integer channel, string name, key id, string message)
     {
+        if (ja_venceu) return; // Se já ganhou, ignora o resto
+        
+        // Ignora a mensagem de vitória se vier de outra pessoa (evita erros)
+        if (llSubStringIndex(message, "VENCEDOR:") != -1) return;
+        
         integer numero_sorteado = (integer)message;
         
         // Verifica se o jogador tem o número na cartela
@@ -97,13 +118,23 @@ default
             {
                 numeros_marcados += [numero_sorteado];
                 llOwnerSay("🎯 Você marcou o número: " + message);
-                atualizar_visual();
                 
-                // Se marcou os 24 números, grita Bingo!
+                // Verifica se marcou todos os 24 números (Cartela Cheia)
                 if (llGetListLength(numeros_marcados) >= 24)
                 {
-                    llSay(0, "🎉 BINGO!!! " + llKey2Name(llGetOwner()) + " COMPLETOU A CARTELA! 🎉");
-                    llSetText("🎉 BINGO! VOCÊ VENCEU! 🎉\n\n" + llGetText(), <0.0, 1.0, 0.0>, 1.0); // Fica verde
+                    ja_venceu = TRUE;
+                    string nome = llKey2Name(llGetOwner());
+                    
+                    llSay(0, "🎉 BINGO!!! " + nome + " COMPLETOU A CARTELA! 🎉");
+                    
+                    // --- AQUI: A CARTELA AVISA O GLOBO PARA PARAR ---
+                    llRegionSay(canal_bingo, "VENCEDOR:" + nome);
+                    
+                    atualizar_visual(TRUE); // Atualiza como VENCEDOR
+                }
+                else
+                {
+                    atualizar_visual(FALSE); // Apenas atualiza a marcação
                 }
             }
         }
