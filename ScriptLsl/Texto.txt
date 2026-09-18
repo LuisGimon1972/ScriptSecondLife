@@ -167,8 +167,8 @@ Ativar Luz Própria (Fullbright): Na aba Texture do objeto, marque a caixa Fullb
 
 Altura de Altura do Palco: Posicione a base do painel entre 1.5m e 2.0m de altura em relação ao chão onde os avatares ficam, evitando que a cabeça dos jogadores tape a visão dos números.
 
-BingoDonoSelecaoLetras
-BingoJogadorInteligente
-BingoDistribuidor
-BingoPalco
+    BingoDonoSelecaoLetras
+    BingoJogadorInteligente
+    BingoDistribuidor
+    BingoPalco
 
