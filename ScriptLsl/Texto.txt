@@ -166,3 +166,9 @@ Fundo de Alto Contraste: Pinte a face frontal do painel com uma cor bem escura (
 Ativar Luz Própria (Fullbright): Na aba Texture do objeto, marque a caixa Fullbright. Isso faz a tela brilhar no escuro sem depender das luzes da boate.
 
 Altura de Altura do Palco: Posicione a base do painel entre 1.5m e 2.0m de altura em relação ao chão onde os avatares ficam, evitando que a cabeça dos jogadores tape a visão dos números.
+
+BingoDonoSelecaoLetras
+BingoJogadorInteligente
+BingoDistribuidor
+BingoPalco
+
