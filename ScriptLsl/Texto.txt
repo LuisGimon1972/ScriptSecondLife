@@ -108,3 +108,40 @@ Aplicar a Textura e o Script: É nessa placa que você vai configurar a textura 
 
 Ou seja, você só precisa moldar um bloco básico em forma de retângulo no próprio mundo virtual. O script e a textura fazem o resto do trabalho para transformá-lo em um espelho inteligente!
 
+
+Opção 2: Ter 1 Único Distribuidor com Menu (Mais Profissional)
+Você cria um único objeto no chão que guarda os dois tipos de cartela dentro dele. Quando você (dono) clica nele, abre um menu de botões na tela para você escolher qual cartela a caixa vai entregar aos jogadores.
+
+Como configurar o Distribuidor Único:
+
+Crie uma caixa no chão para ser o Distribuidor.
+
+Guarde no inventário as duas cartelas que você criou antes com estes nomes exatos:
+
+Cartela Linha
+
+Cartela Cheia
+
+Arraste essas duas cartelas para dentro da aba Conteúdo (Content) do Distribuidor.
+
+Crie um novo script dentro do Distribuidor e cole este código:
+
+
+
+
+
+Exatamente! Com este sistema, só precisa de colocar um único objeto de cartela (a Cartela Inteligente) dentro do distribuidor.
+
+Isso simplifica todo o processo do evento:
+
+Uma só Cartela no Distribuidor: Guarda apenas a "Cartela Inteligente" dentro da aba Content do seu objeto distribuidor.
+
+Zero troca de objetos para os jogadores: O jogador clica no distribuidor uma única vez no início da festa, recebe a cartela e veste-a no ecrã (HUD). Ele não precisa de voltar ao distribuidor nem de trocar de objeto para mudar de modalidade.
+
+O Globo comanda tudo:
+
+Quer jogar Linha? Escolhe "Modo LINHA" no Globo e clica em Iniciar. A cartela de toda a gente atualiza-se para validar linhas.
+
+Quer jogar Cartela Cheia a seguir? Seleciona "Modo CHEIA" no Globo e clica em Iniciar. A mesma cartela limpa os números marcados, reseta-se e passa a validar os 24 números automaticamente.
+
+Desta forma, no chão do seu evento basta ter o Globo e 1 Distribuidor com a Cartela Inteligente lá dentro.
