@@ -7,6 +7,7 @@ default
 {
     state_entry()
     {
+        llSetObjectName("Smart Mirror v1.00");
         llOwnerSay("🪞 Smart-Mirror pronto e operacional.");
         
         // Efeito visual sutil de partículas na moldura
