@@ -1,0 +1,28 @@
+// Nome EXATO da cartela guardada dentro do Distribuidor (aba Content)
+string NOME_CARTELA = "Cartela Bingo"; 
+
+default
+{
+    state_entry()
+    {
+        llSetObjectName("Distribuidor do Bingo");
+        llSetText("📦 DISTRIBUIDOR DE BINGO 📦\nClique para pegar sua cartela!", <0.0, 1.0, 1.0>, 1.0);
+    }
+
+    touch_start(integer total_number)
+    {
+        key clicou = llDetectedKey(0);
+
+        // Verifica se a cartela existe no conteúdo do distribuidor
+        if (llGetInventoryType(NOME_CARTELA) != INVENTORY_NONE)
+        {
+            // Envia o objeto diretamente para o inventário do avatar
+            llGiveInventory(clicou, NOME_CARTELA);
+            llRegionSayTo(clicou, 0, "🎯 Cartela entregue! Abra o inventário e selecione 'Anexar ao HUD' (ou arraste para o chão para testar).");
+        }
+        else
+        {
+            llRegionSayTo(clicou, 0, "⚠️ Erro: Não foi encontrada a '" + NOME_CARTELA + "' dentro da aba Content do distribuidor!");
+        }
+    }
+}
